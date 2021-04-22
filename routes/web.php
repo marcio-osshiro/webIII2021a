@@ -18,4 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/categoria', [CategoriaController::class, 'index']);
+Route::get('/categoria', [CategoriaController::class, 'index'])->name('categoria_listagem');
+Route::get('/categoria/novo', [CategoriaController::class, 'novo'])->name('categoria_novo');
+Route::post('/categoria/salvar', [CategoriaController::class, 'salvar'])->name('categoria_salvar');
+Route::get('/categoria/editar/{id}', [CategoriaController::class, 'editar'])->name('categoria_editar');
+Route::get('/categoria/excluir/{id}', [CategoriaController::class, 'excluir'])->name('categoria_excluir');

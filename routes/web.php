@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\NoticiaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,3 +24,10 @@ Route::get('/categoria/novo', [CategoriaController::class, 'novo'])->name('categ
 Route::post('/categoria/salvar', [CategoriaController::class, 'salvar'])->name('categoria_salvar');
 Route::get('/categoria/editar/{id}', [CategoriaController::class, 'editar'])->name('categoria_editar');
 Route::get('/categoria/excluir/{id}', [CategoriaController::class, 'excluir'])->name('categoria_excluir');
+
+
+Route::get('/noticia', [NoticiaController::class, 'index'])->name('noticia_listagem');
+Route::get('/noticia/novo', [NoticiaController::class, 'novo'])->name('noticia_novo');
+Route::post('/noticia/salvar', [NoticiaController::class, 'salvar'])->name('noticia_salvar');
+Route::get('/noticia/editar/{id}', [NoticiaController::class, 'editar'])->name('noticia_editar');
+Route::get('/noticia/excluir/{id}', [NoticiaController::class, 'excluir'])->name('noticia_excluir');

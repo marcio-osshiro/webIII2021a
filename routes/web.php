@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\NoticiaController;
+use App\Http\Controllers\IndexController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,9 +16,7 @@ use App\Http\Controllers\NoticiaController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [IndexController::class, 'index'])->name('inicio');
 
 Route::get('/categoria', [CategoriaController::class, 'index'])->name('categoria_listagem');
 Route::get('/categoria/novo', [CategoriaController::class, 'novo'])->name('categoria_novo');

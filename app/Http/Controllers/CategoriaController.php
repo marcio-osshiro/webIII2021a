@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Categoria;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\CategoriaRequest;
 
 class CategoriaController extends Controller
 {
@@ -20,7 +22,38 @@ class CategoriaController extends Controller
       return view('categoria.formulario', ['categoria' => $categoria] );
     }
 
-    function salvar(Request $request) {
+    function salvar(CategoriaRequest $request) {
+      if ($request->input("id") == 0) {
+        $categoria = new Categoria();
+      } else {
+        $categoria = Categoria::find($request->input("id"));
+      }
+      $categoria->descricao = $request->input("descricao");
+      $categoria->save();
+      return redirect()->route("categoria_listagem");
+    }
+
+    // funcao depreciada, utilizando categoriarequest
+    function salvar1(Request $request) {
+      $validator = Validator::make($request->all(), [
+                  'descricao' => 'required|min:5',
+                  'id' => 'notIn([0])',
+              ]);
+
+      if ($validator->fails()) {
+          if ($request->input("id")==0) {
+            return redirect()->route("categoria_novo")
+                        ->withErrors($validator)
+                        ->withInput();
+
+          } else {
+            return redirect()->route("categoria_editar", ['id' => $request->input("id")])
+                        ->withErrors($validator)
+                        ->withInput();
+          }
+      }
+
+
         if ($request->input("id") == 0) {
           $categoria = new Categoria();
         } else {

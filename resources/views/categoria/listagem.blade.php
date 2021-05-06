@@ -12,6 +12,7 @@
         <th scope="col">ID</th>
         <th scope="col">Descrição</th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -19,6 +20,11 @@
           <tr>
             <td>{{$categoria->id}}</td>
             <td>{{$categoria->descricao}}</td>
+            <td>
+              @if($categoria->imagem != "")
+                <img style="width: 50px;height:50px;" src="storage/{{$categoria->imagem}}" >
+              @endif
+            </td>
             <td>
               <a href="{{route('categoria_editar',['id' => $categoria->id])}}" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
               <a href="{{route('categoria_excluir',['id' => $categoria->id])}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>

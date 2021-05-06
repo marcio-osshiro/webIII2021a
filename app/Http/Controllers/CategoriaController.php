@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Categoria;
 use Illuminate\Support\Facades\Validator;
@@ -28,7 +29,24 @@ class CategoriaController extends Controller
       } else {
         $categoria = Categoria::find($request->input("id"));
       }
+
+      $imagem = "";
+      if ($request->file('file')) {
+        $path = $request->file('file')->store(
+          'public');
+        $caminhos = explode("/", $path);
+        $tamanho = sizeof($caminhos);
+        $imagem = $caminhos[$tamanho-1];
+
+        if ($categoria->imagem != "") {
+          Storage::delete('public/'.$categoria->imagem);
+        }
+      }
+
       $categoria->descricao = $request->input("descricao");
+      if ($imagem != "") {
+        $categoria->imagem = $imagem;
+      }
       $categoria->save();
       return redirect()->route("categoria_listagem");
     }

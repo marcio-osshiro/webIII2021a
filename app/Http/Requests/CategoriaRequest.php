@@ -27,6 +27,7 @@ class CategoriaRequest extends FormRequest
         return [
             //
             'descricao' => 'required|min:5',
+
         ];
     }
 

@@ -12,11 +12,22 @@
   @endif
 
   <h1>Cadastro de Categoria</h1>
-  <form action="{{route('categoria_salvar')}}" method="post">
+  @if($categoria->imagem != "")
+    <img style="width: 200px;height:200px;" src="/storage/{{$categoria->imagem}}" >
+  @endif
+
+  <form action="{{route('categoria_salvar')}}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="mb-3">
       <label for="id" class="form-label">ID</label>
       <input type="text" class="form-control" id="id" name="id" readonly value="{{$categoria->id}}">
+    </div>
+    <div class="mb-3">
+      <label for="file" class="form-label">Arquivo</label>
+      <input type="file" class="form-control @error('file') is-invalid @enderror" id="file" name="file" value="{{old('descricao', $categoria->descricao) }}" accept="image/*">
+      @error('file')
+          <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
     <div class="mb-3">
       <label for="descricao" class="form-label">Descrição</label>
@@ -25,6 +36,7 @@
           <div class="alert alert-danger">{{ $message }}</div>
       @enderror
     </div>
+
     <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Salvar</button>
   </form>
 @endsection

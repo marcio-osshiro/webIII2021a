@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Noticia;
 use App\Models\Categoria;
+use App\Http\Requests\NoticiaRequest;
 
 class NoticiaController extends Controller
 {
@@ -32,11 +33,26 @@ class NoticiaController extends Controller
     );
   }
 
-  function salvar(Request $request) {
+  function salvar(NoticiaRequest $request) {
       if ($request->input("id") == 0) {
         $noticia = new Noticia();
       } else {
         $noticia = Noticia::find($request->input("id"));
+      }
+      $imagem = "";
+      if ($request->file('file')) {
+        $path = $request->file('file')->store(
+          'public');
+        $caminhos = explode("/", $path);
+        $tamanho = sizeof($caminhos);
+        $imagem = $caminhos[$tamanho-1];
+
+        if ($noticia->imagem != "") {
+          Storage::delete('public/'.$noticia->imagem);
+        }
+      }
+      if ($imagem != "") {
+        $noticia->imagem = $imagem;
       }
       $noticia->resumo = $request->input("resumo");
       $noticia->descricao = $request->input("descricao");
@@ -61,6 +77,9 @@ class NoticiaController extends Controller
 
   function excluir($id) {
     $noticia = Noticia::find($id);
+    if ($noticia->imagem != "") {
+      Storage::delete('public/'.$noticia->imagem);
+    }
     $noticia->delete();
     return redirect()->route("noticia_listagem");
   }

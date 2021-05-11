@@ -13,7 +13,7 @@
 
   <h1>Cadastro de Categoria</h1>
   @if($categoria->imagem != "")
-    <img style="width: 200px;height:200px;" src="/storage/{{$categoria->imagem}}" >
+    <img style="width: 200px" src="/storage/{{$categoria->imagem}}" >
   @endif
 
   <form action="{{route('categoria_salvar')}}" method="post" enctype="multipart/form-data">
@@ -24,7 +24,7 @@
     </div>
     <div class="mb-3">
       <label for="file" class="form-label">Arquivo</label>
-      <input type="file" class="form-control @error('file') is-invalid @enderror" id="file" name="file" value="{{old('descricao', $categoria->descricao) }}" accept="image/*">
+      <input type="file" class="form-control @error('file') is-invalid @enderror" id="file" name="file" accept="image/*">
       @error('file')
           <div class="alert alert-danger">{{ $message }}</div>
       @enderror

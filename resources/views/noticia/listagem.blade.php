@@ -15,6 +15,7 @@
         <th scope="col">Autor</th>
         <th scope="col">Categoria</th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -25,6 +26,11 @@
             <td>{{$noticia->data->format('d/m/Y') }}</td>
             <td>{{$noticia->autor}}</td>
             <td>{{$noticia->categoria->descricao}}</td>
+            <td>
+              @if($noticia->imagem != "")
+                <img style="height: 50px" src="storage/{{$noticia->imagem}}" >
+              @endif
+            </td>
             <td>
               <a href="{{route('noticia_editar',['id' => $noticia->id])}}" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
               <a href="{{route('noticia_excluir',['id' => $noticia->id])}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>

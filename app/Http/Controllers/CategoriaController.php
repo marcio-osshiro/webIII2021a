@@ -89,6 +89,9 @@ class CategoriaController extends Controller
 
     function excluir($id) {
       $categoria = Categoria::find($id);
+      if ($categoria->imagem != "") {
+        Storage::delete('public/'.$categoria->imagem);
+      }
       $categoria->delete();
       return redirect()->route("categoria_listagem");
     }

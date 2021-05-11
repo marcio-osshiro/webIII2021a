@@ -22,7 +22,7 @@
             <td>{{$categoria->descricao}}</td>
             <td>
               @if($categoria->imagem != "")
-                <img style="width: 50px;height:50px;" src="storage/{{$categoria->imagem}}" >
+                <img style="width: 50px" src="storage/{{$categoria->imagem}}" >
               @endif
             </td>
             <td>

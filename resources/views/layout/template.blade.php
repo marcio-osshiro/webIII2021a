@@ -49,19 +49,38 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="/categoria">Categoria</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="/noticia">Notícia</a>
-        </li>
+        @auth
+          <li class="nav-item">
+            <a class="nav-link active" href="/categoria">Categoria</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/noticia">Notícia</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Sair</a>
+            <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none;">
+              {{ csrf_field() }}
+            </form>
+          </li>
+        @else
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ route('login')}}">Entrar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ route('register')}}">Registrar</a>
+          </li>
+        @endauth
+
+
       </ul>
     </div>
   </div>
 </nav>
 
 <main class="container">
-
+    @auth
+      <p style="text-align: right">{{ auth()->user()->email}}</p>
+    @endauth
     @yield('conteudo')
 
 </main>

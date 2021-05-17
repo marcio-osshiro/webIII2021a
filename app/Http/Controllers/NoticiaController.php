@@ -9,6 +9,11 @@ use App\Http\Requests\NoticiaRequest;
 
 class NoticiaController extends Controller
 {
+  function __construct() {
+    $this->middleware('auth');
+  }
+
+
   function index() {
     $noticias = Noticia::all();
     return view('noticia.listagem',['noticias' => $noticias]);

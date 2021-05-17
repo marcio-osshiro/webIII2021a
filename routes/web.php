@@ -30,3 +30,7 @@ Route::get('/noticia/novo', [NoticiaController::class, 'novo'])->name('noticia_n
 Route::post('/noticia/salvar', [NoticiaController::class, 'salvar'])->name('noticia_salvar');
 Route::get('/noticia/editar/{id}', [NoticiaController::class, 'editar'])->name('noticia_editar');
 Route::get('/noticia/excluir/{id}', [NoticiaController::class, 'excluir'])->name('noticia_excluir');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');

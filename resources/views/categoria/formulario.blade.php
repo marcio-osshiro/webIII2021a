@@ -13,7 +13,7 @@
 
   <h1>Cadastro de Categoria</h1>
   @if($categoria->imagem != "")
-    <img style="width: 200px" src="/storage/{{$categoria->imagem}}" >
+    <img style="width: 200pxve" src="/storage/{{$categoria->imagem}}" >
   @endif
 
   <form action="{{route('categoria_salvar')}}" method="post" enctype="multipart/form-data">

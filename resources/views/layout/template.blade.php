@@ -81,6 +81,13 @@
     @auth
       <p style="text-align: right">{{ auth()->user()->email}}</p>
     @endauth
+
+    @if (session('mensagem'))
+         <div class="alert alert-success">
+             {{ session('mensagem') }}
+         </div>
+    @endif
+
     @yield('conteudo')
 
 </main>

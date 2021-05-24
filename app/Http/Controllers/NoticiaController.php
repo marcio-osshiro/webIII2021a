@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Noticia;
 use App\Models\Categoria;
 use App\Http\Requests\NoticiaRequest;
+use Illuminate\Support\Facades\Storage;
+
 
 class NoticiaController extends Controller
 {
@@ -15,7 +17,7 @@ class NoticiaController extends Controller
 
 
   function index() {
-    $noticias = Noticia::all();
+    $noticias = Noticia::orderBy('data','desc')->paginate(7);
     return view('noticia.listagem',['noticias' => $noticias]);
   }
 
@@ -65,7 +67,8 @@ class NoticiaController extends Controller
       $noticia->autor = $request->input("autor");
       $noticia->categoria_id = $request->input("categoria_id");
       $noticia->save();
-      return redirect()->route("noticia_listagem");
+      $mensagem = "Notícia ($noticia->resumo) foi salva";
+      return redirect()->route("noticia_listagem")->with(compact('mensagem'));
   }
 
   function editar($id) {
@@ -85,7 +88,8 @@ class NoticiaController extends Controller
     if ($noticia->imagem != "") {
       Storage::delete('public/'.$noticia->imagem);
     }
+    $mensagem = "Notícia ($noticia->resumo) foi excluída";
     $noticia->delete();
-    return redirect()->route("noticia_listagem");
+    return redirect()->route("noticia_listagem")->with(compact('mensagem'));
   }
 }

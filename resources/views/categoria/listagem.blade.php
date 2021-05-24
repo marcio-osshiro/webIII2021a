@@ -1,6 +1,7 @@
 @extends('layout.template')
 
 @section('conteudo')
+
   <h1>Listagem de Categoria</h1>
   <a href="categoria/novo" class="btn btn-primary">
     <i class="fas fa-file"></i>

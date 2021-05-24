@@ -28,7 +28,7 @@
             <td>{{$noticia->categoria->descricao}}</td>
             <td>
               @if($noticia->imagem != "")
-                <img style="height: 50px" src="storage/{{$noticia->imagem}}" >
+                <img style="height: 40px" src="storage/{{$noticia->imagem}}" >
               @endif
             </td>
             <td>
@@ -44,4 +44,5 @@
       @endforelse
     </tbody>
   </table>
+  {{ $noticias->links() }}
 @endsection

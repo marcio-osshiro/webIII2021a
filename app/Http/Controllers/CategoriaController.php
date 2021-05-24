@@ -52,7 +52,10 @@ class CategoriaController extends Controller
         $categoria->imagem = $imagem;
       }
       $categoria->save();
-      return redirect()->route("categoria_listagem");
+      $mensagem = "Categoria $categoria->descricao foi salva";
+      return redirect()
+        ->route("categoria_listagem")
+        ->with(compact('mensagem'));
     }
 
     // funcao depreciada, utilizando categoriarequest
@@ -93,10 +96,12 @@ class CategoriaController extends Controller
 
     function excluir($id) {
       $categoria = Categoria::find($id);
+      $mensagem = "Categoria: $categoria->descricao foi excluída";
       if ($categoria->imagem != "") {
         Storage::delete('public/'.$categoria->imagem);
       }
       $categoria->delete();
-      return redirect()->route("categoria_listagem");
+      return redirect()->route("categoria_listagem")->with(
+        compact('mensagem'));
     }
 }

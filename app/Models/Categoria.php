@@ -10,4 +10,9 @@ class Categoria extends Model
     use HasFactory;
     protected $table = 'categoria';
     public $timestamps = false;
+
+    public function noticias()
+    {
+        return $this->hasMany('App\Models\Noticia')->take(3);
+    }
 }

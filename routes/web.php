@@ -43,3 +43,5 @@ Route::get('/teste', function() {
 });
 
 Route::get('/news', [NewsController::class, 'index']);
+Route::get('/news/{id}', [NewsController::class, 'noticia'])->name('news_id');
+Route::get('/news/categoria/{id}', [NewsController::class, 'categoria'])->name('news_categoria_id');

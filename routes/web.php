@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,3 +46,7 @@ Route::get('/teste', function() {
 Route::get('/news', [NewsController::class, 'index']);
 Route::get('/news/{id}', [NewsController::class, 'noticia'])->name('news_id');
 Route::get('/news/categoria/{id}', [NewsController::class, 'categoria'])->name('news_categoria_id');
+
+Route::get('/usuario', [UserController::class, 'index'])->name('usuario_listagem');
+Route::get('/usuario/mail/{id}', [UserController::class, 'mail'])->name('usuario_mail');
+Route::post('/usuario/sendmail', [UserController::class, 'sendmail'])->name('usuario_sendmail');

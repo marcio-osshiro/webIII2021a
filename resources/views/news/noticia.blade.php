@@ -40,9 +40,9 @@
 
 
 @section('conteudo')
+  <ul>
   @foreach($noticias as $noticia)
-    <ul>
       <li><a href="{{route('news_id', $noticia->id)}}">{{$noticia->resumo}} - {{$noticia->data->format('d-m-Y')}} - {{$noticia->autor}}</a></li>
-    </ul>
   @endforeach
+  </ul>
 @endsection

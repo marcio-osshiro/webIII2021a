@@ -57,6 +57,9 @@
             <a class="nav-link active" href="/noticia">Notícia</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link active" href="/usuario">Usuário</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link active" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Sair</a>
             <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none;">
               {{ csrf_field() }}

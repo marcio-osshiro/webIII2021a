@@ -2,6 +2,10 @@
 
 @section('conteudo')
   <h1>Listagem de Notícias</h1>
+  <a href="noticia/report" class="btn btn-primary">
+    <i class="fas fa-print"></i>
+     Imprimir
+  </a>
   <a href="noticia/novo" class="btn btn-primary">
     <i class="fas fa-file"></i>
      Novo

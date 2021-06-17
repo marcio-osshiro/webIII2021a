@@ -92,4 +92,14 @@ class NoticiaController extends Controller
     $noticia->delete();
     return redirect()->route("noticia_listagem")->with(compact('mensagem'));
   }
+
+  function report() {
+    $noticias = Noticia::all();
+    $pdf = app('dompdf.wrapper');
+    $pdf->getDomPDF()->set_option("enable_php", true);
+    $pdf->loadView('noticia.report', compact('noticias'));
+    return $pdf->download('noticias.pdf');
+    //return view('noticia.report',['noticias' => $noticias]);
+
+  }
 }

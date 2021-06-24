@@ -7,6 +7,8 @@ use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VendaController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,3 +53,9 @@ Route::get('/news/categoria/{id}', [NewsController::class, 'categoria'])->name('
 Route::get('/usuario', [UserController::class, 'index'])->name('usuario_listagem');
 Route::get('/usuario/mail/{id}', [UserController::class, 'mail'])->name('usuario_mail');
 Route::post('/usuario/sendmail', [UserController::class, 'sendmail'])->name('usuario_sendmail');
+
+Route::get('/venda/novo', [VendaController::class, 'novo']);
+Route::post('/venda/salvar', [VendaController::class, 'salvar'])->name('venda_salvar');
+Route::get('/venda', [VendaController::class, 'lista'])->name('venda_lista');
+Route::get('/venda/excluir/{id}', [VendaController::class, 'excluir']);
+Route::get('/venda/editar/{id}', [VendaController::class, 'editar']);
